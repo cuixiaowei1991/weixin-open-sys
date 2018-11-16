@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.dao.WeChatPublicDao">
+    <resultMap id="BaseResultMap" type="com.cn.entity.WeChatPublic" >
+        <id column="WECHATPUBLIC_ID" property="weChatPublic_id" jdbcType="INTEGER" />
+        <result column="WECHATPUBLIC_APPID" property="weChatPublic_appid" jdbcType="VARCHAR" />
+        <result column="WECHATPUBLIC_APPID_SECERT" property="weChatPublic_appid_secert" jdbcType="VARCHAR" />
+        <result column="WECHATPUBLIC_APPID_TOKEN" property="weChatPublic_appid_token" jdbcType="VARCHAR" />
+        <result column="WECHATPUBLIC_APPID_REFRESHTOKEN" property="weChatPublic_appid_refreshtoken" jdbcType="VARCHAR" />
+        <result column="WECHATPUBLIC_OPENPLAT_APPID" property="weChatPublic_openPlat_appid" jdbcType="VARCHAR" />
+        <result column="WECHATPUBLIC_AUTHORIZER_CODE" property="wechatpublic_Authorizer_code" jdbcType="VARCHAR" />
+        <result column="WECHATPUBLIC_CODE_CREATETIME" property="wechatpublic_Code_CreateTime" jdbcType="VARCHAR" />
+        <result column="AUTHORIZATION_STATE" property="Authorization_state" jdbcType="VARCHAR" />
+        <result column="AUTHORIZATION_TOKEN_TIME" property="authorizer_token_time" jdbcType="VARCHAR" />
+        <result column="WECHAT_NUM" property="wechat_num" jdbcType="VARCHAR" />
+        <result column="WECHAT_PAYAPI" property="wechat_payapi" jdbcType="VARCHAR" />
+        <result column="WECHAT_NICKNAME" property="wechat_nickname" jdbcType="VARCHAR" />
+        <result column="WECHAT_MERCHANTID" property="wechat_merchantid" jdbcType="VARCHAR" />
+        <result column="WECHAT_CODEURL" property="wechat_codeurl" jdbcType="VARCHAR" />
+        <result column="WECHAT_HEADIMAGE" property="wechat_headimage" jdbcType="VARCHAR" />
+        <result column="WECHAT_RESERVED_FIELD1" property="wechat_reserved_field1" jdbcType="VARCHAR" />
+        <result column="WECHAT_RESERVED_FIELD2" property="wechat_reserved_field2" jdbcType="VARCHAR" />
+        <result column="WECHAT_RESERVED_FIELD3" property="wechat_reserved_field3" jdbcType="VARCHAR" />
+        <result column="WECHAT_PAY_PEM1" property="wechat_pay_pem1" jdbcType="VARCHAR" />
+        <result column="WECHAT_PAY_PEM2" property="wechat_pay_pem2" jdbcType="VARCHAR" />
+        <result column="WECHAT_PAY_P12" property="wechat_pay_p12" jdbcType="VARCHAR" />
+        <result column="WECHAT_PAY_RETURN_URL" property="wechat_pay_return_url" jdbcType="VARCHAR" />
+        <result column="WECHAT_OPENF_COMMON_URL" property="wechat_openf_common_url" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        WECHATPUBLIC_ID, WECHATPUBLIC_APPID, WECHATPUBLIC_APPID_SECERT, WECHATPUBLIC_APPID_TOKEN,WECHATPUBLIC_APPID_REFRESHTOKEN,
+        WECHATPUBLIC_OPENPLAT_APPID,WECHATPUBLIC_AUTHORIZER_CODE,WECHATPUBLIC_CODE_CREATETIME,AUTHORIZATION_STATE,
+        AUTHORIZATION_TOKEN_TIME,WECHAT_NUM,WECHAT_PAYAPI,WECHAT_NICKNAME,WECHAT_MERCHANTID,WECHAT_CODEURL,WECHAT_HEADIMAGE,
+        WECHAT_RESERVED_FIELD1,WECHAT_RESERVED_FIELD2,WECHAT_RESERVED_FIELD3,WECHAT_PAY_PEM1,WECHAT_PAY_PEM2,WECHAT_PAY_P12,WECHAT_PAY_RETURN_URL,
+        WECHAT_OPENF_COMMON_URL
+    </sql>
+    <select id="getWeChatPublicByParamters" resultMap="BaseResultMap" parameterType="com.cn.entity.WeChatPublic">
+        select
+        <include refid="Base_Column_List" />
+        from wx_wechatpublic
+        where 1=1
+        <if test="weChatPublic_id != null and weChatPublic_id != ''">
+            and WECHATPUBLIC_ID=#{weChatPublic_id}
+        </if>
+        <if test="weChatPublic_appid != null and weChatPublic_appid != ''">
+            and WECHATPUBLIC_APPID=#{weChatPublic_appid}
+        </if>
+        <if test="weChatPublic_openPlat_appid != null and weChatPublic_openPlat_appid != ''">
+            and WECHATPUBLIC_OPENPLAT_APPID=#{weChatPublic_openPlat_appid}
+        </if>
+        <if test="Authorization_state != null and Authorization_state != ''">
+            and AUTHORIZATION_STATE=#{Authorization_state}
+        </if>
+        <if test="wechat_nickname != null and wechat_nickname != ''">
+            and WECHAT_NICKNAME LIKE '%${wechat_nickname}%'
+        </if>
+    </select>
+    <insert id="insert" parameterType="com.cn.entity.WeChatPublic" >
+
+        insert into wx_wechatpublic
+        <selectKey keyProperty="weChatPublic_id" order="AFTER" resultType="java.lang.Integer">
+            SELECT last_insert_id()
+        </selectKey>
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="weChatPublic_appid != null" >
+                WECHATPUBLIC_APPID,
+            </if>
+            <if test="weChatPublic_appid_secert != null" >
+                WECHATPUBLIC_APPID_SECERT,
+            </if>
+            <if test="weChatPublic_appid_token != null" >
+                WECHATPUBLIC_APPID_TOKEN,
+            </if>
+            <if test="weChatPublic_appid_refreshtoken != null" >
+                WECHATPUBLIC_APPID_REFRESHTOKEN,
+            </if>
+            <if test="weChatPublic_openPlat_appid != null" >
+                WECHATPUBLIC_OPENPLAT_APPID,
+            </if>
+            <if test="wechatpublic_Authorizer_code != null" >
+                WECHATPUBLIC_AUTHORIZER_CODE,
+            </if>
+            <if test="wechatpublic_Code_CreateTime != null" >
+                WECHATPUBLIC_CODE_CREATETIME,
+            </if>
+            <if test="Authorization_state != null" >
+                AUTHORIZATION_STATE,
+            </if>
+            <if test="authorizer_token_time != null" >
+                AUTHORIZATION_TOKEN_TIME,
+            </if>
+            <if test="wechat_num != null" >
+                WECHAT_NUM,
+            </if>
+            <if test="wechat_payapi != null" >
+                WECHAT_PAYAPI,
+            </if>
+            <if test="wechat_nickname != null" >
+                WECHAT_NICKNAME,
+            </if>
+            <if test="wechat_merchantid != null" >
+                WECHAT_MERCHANTID,
+            </if>
+            <if test="wechat_codeurl != null" >
+                WECHAT_CODEURL,
+            </if>
+            <if test="wechat_headimage != null" >
+                WECHAT_HEADIMAGE,
+            </if>
+            <if test="wechat_reserved_field1 != null" >
+                WECHAT_RESERVED_FIELD1,
+            </if>
+            <if test="wechat_reserved_field2 != null" >
+                WECHAT_RESERVED_FIELD2,
+            </if>
+            <if test="wechat_reserved_field3 != null" >
+                WECHAT_RESERVED_FIELD3,
+            </if>
+            <if test="wechat_pay_pem1 != null" >
+                WECHAT_PAY_PEM1,
+            </if>
+            <if test="wechat_pay_pem2 != null" >
+                WECHAT_PAY_PEM2,
+            </if>
+            <if test="wechat_pay_p12 != null" >
+                WECHAT_PAY_P12,
+            </if>
+            <if test="wechat_pay_return_url != null" >
+                WECHAT_PAY_RETURN_URL,
+            </if>
+            <if test="wechat_openf_common_url != null" >
+                WECHAT_OPENF_COMMON_URL,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="weChatPublic_appid != null" >
+                #{weChatPublic_appid,jdbcType=VARCHAR},
+            </if>
+            <if test="weChatPublic_appid_secert != null" >
+                #{weChatPublic_appid_secert,jdbcType=VARCHAR},
+            </if>
+            <if test="weChatPublic_appid_token != null" >
+                #{weChatPublic_appid_token,jdbcType=VARCHAR},
+            </if>
+            <if test="weChatPublic_appid_refreshtoken != null" >
+                #{weChatPublic_appid_refreshtoken,jdbcType=VARCHAR},
+            </if>
+            <if test="weChatPublic_openPlat_appid != null" >
+                #{weChatPublic_openPlat_appid,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatpublic_Authorizer_code != null" >
+                #{wechatpublic_Authorizer_code,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatpublic_Code_CreateTime != null" >
+                #{wechatpublic_Code_CreateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="Authorization_state != null" >
+                #{Authorization_state,jdbcType=VARCHAR},
+            </if>
+            <if test="authorizer_token_time != null" >
+                #{authorizer_token_time,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_num != null" >
+                #{wechat_num,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_payapi != null" >
+                #{wechat_payapi,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_nickname != null" >
+                #{wechat_nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_merchantid != null" >
+                #{wechat_merchantid,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_codeurl != null" >
+                #{wechat_codeurl,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_headimage != null" >
+                #{wechat_headimage,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_reserved_field1 != null" >
+                #{wechat_reserved_field1,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_reserved_field2 != null" >
+                #{wechat_reserved_field2,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_reserved_field3 != null" >
+                #{wechat_reserved_field3,jdbcType=VARCHAR},
+            </if>
+
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.cn.entity.WeChatPublic" >
+        update wx_wechatpublic
+        <set >
+            <if test="weChatPublic_appid != null" >
+                WECHATPUBLIC_APPID = #{weChatPublic_appid,jdbcType=VARCHAR},
+            </if>
+            <if test="weChatPublic_appid_secert != null" >
+                WECHATPUBLIC_APPID_SECERT = #{weChatPublic_appid_secert,jdbcType=VARCHAR},
+            </if>
+            <if test="weChatPublic_appid_token != null" >
+                WECHATPUBLIC_APPID_TOKEN = #{weChatPublic_appid_token,jdbcType=VARCHAR},
+            </if>
+            <if test="weChatPublic_appid_refreshtoken != null" >
+                WECHATPUBLIC_APPID_REFRESHTOKEN = #{weChatPublic_appid_refreshtoken,jdbcType=VARCHAR},
+            </if>
+            <if test="weChatPublic_openPlat_appid != null" >
+                WECHATPUBLIC_OPENPLAT_APPID = #{weChatPublic_openPlat_appid,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatpublic_Authorizer_code != null" >
+                WECHATPUBLIC_AUTHORIZER_CODE = #{wechatpublic_Authorizer_code,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatpublic_Code_CreateTime != null" >
+                WECHATPUBLIC_CODE_CREATETIME = #{wechatpublic_Code_CreateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="Authorization_state != null" >
+                AUTHORIZATION_STATE = #{Authorization_state,jdbcType=VARCHAR},
+            </if>
+            <if test="authorizer_token_time != null" >
+                AUTHORIZATION_TOKEN_TIME = #{authorizer_token_time,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_num != null" >
+                WECHAT_NUM = #{wechat_num,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_payapi != null" >
+                WECHAT_PAYAPI = #{wechat_payapi,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_nickname != null" >
+                WECHAT_NICKNAME = #{wechat_nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_merchantid != null" >
+                WECHAT_MERCHANTID = #{wechat_merchantid,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_codeurl != null" >
+                WECHAT_CODEURL = #{wechat_codeurl,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_headimage != null" >
+                WECHAT_HEADIMAGE = #{wechat_headimage,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_reserved_field1 != null" >
+                WECHAT_RESERVED_FIELD1 = #{wechat_reserved_field1,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_reserved_field2 != null" >
+                WECHAT_RESERVED_FIELD2 = #{wechat_reserved_field2,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_reserved_field3 != null" >
+                WECHAT_RESERVED_FIELD3 = #{wechat_reserved_field3,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_pay_pem1 != null" >
+                WECHAT_PAY_PEM1 = #{wechat_pay_pem1,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_pay_pem2 != null" >
+                WECHAT_PAY_PEM2 = #{wechat_pay_pem2,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_pay_p12 != null" >
+                WECHAT_PAY_P12 = #{wechat_pay_p12,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_pay_return_url != null" >
+                WECHAT_PAY_RETURN_URL = #{wechat_pay_return_url,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat_openf_common_url != null" >
+                WECHAT_OPENF_COMMON_URL = #{wechat_openf_common_url,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where 1=1
+        <if test="weChatPublic_appid != null and weChatPublic_appid != ''">
+            and WECHATPUBLIC_APPID = #{weChatPublic_appid}
+        </if>
+        <if test="weChatPublic_id != null and weChatPublic_id != ''">
+            and WECHATPUBLIC_ID = #{weChatPublic_id}
+        </if>
+    </update>
+    <select id="count" parameterType="com.cn.entity.WeChatPublic" resultType="java.lang.Integer">
+        SELECT count(1) FROM wx_wechatpublic
+         WHERE 1=1
+        <if test="wechat_nickname != null and wechat_nickname != ''" >
+            and WECHAT_NICKNAME LIKE '%${wechat_nickname}%'
+        </if>
+        <if test="weChatPublic_appid != null and weChatPublic_appid != ''">
+            and WECHATPUBLIC_APPID = #{weChatPublic_appid}
+        </if>
+
+    </select>
+
+    <select id="queryPageByConditons" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT * from (SELECT T1.*, rownum linenum from (
+        select
+        <include refid="Base_Column_List" />
+        from wx_wechatpublic
+        where 1=1
+        <if test="map.weChatPublic_id != null and map.weChatPublic_id != ''">
+            and WECHATPUBLIC_ID=#{weChatPublic_id}
+        </if>
+       <if test="map.Authorization_state != null and map.Authorization_state != ''">
+            and AUTHORIZATION_STATE=#{Authorization_state}
+        </if>
+        <if test="map.wechat_nickname != null and map.wechat_nickname != ''">
+            and WECHAT_NICKNAME LIKE '%${wechat_nickname}%'
+        </if>
+    order by
+        WECHATPUBLIC_ID desc
+        )T1 WHERE rownum &lt;= #{map.endRow})
+        T2 WHERE linenum &gt;= #{map.startRow}
+    </select>
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(1) FROM wx_wechatpublic
+        WHERE 1=1
+        <if test="wechat_nickname != null and wechat_nickname != ''" >
+            and WECHAT_NICKNAME LIKE '%${map.wechat_nickname}%'
+        </if>
+        <if test="weChatPublic_appid != null and weChatPublic_appid != ''">
+            and WECHATPUBLIC_APPID = #{map.weChatPublic_appid}
+        </if>
+
+    </select>
+</mapper>
